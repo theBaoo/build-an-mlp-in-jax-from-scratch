@@ -62,8 +62,11 @@ def init_linear_layer(key, in_dim, out_dim, scale=0.1):
         n: p for n, p in zip(['W', 'b'], [scale * sample_normal_matrix(key, (in_dim, out_dim)), jnp.zeros((out_dim))])
     }
 
-# Step 8 - init_mlp_params (not yet solved)
-# TODO: implement
+# Step 8 - init_mlp_params
+def init_mlp_params(key, layer_sizes, scale=0.1):
+    # TODO: build a list of per-layer parameter dicts from adjacent layer sizes.
+    subkeys = split_prng_key(key, len(layer_sizes) - 1)
+    return [init_linear_layer(sk, in_dim, out_dim, scale) for sk, in_dim, out_dim in zip(subkeys, layer_sizes[: -1], layer_sizes[1 :]) ]
 
 # Step 9 - linear_forward (not yet solved)
 # TODO: implement
