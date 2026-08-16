@@ -68,8 +68,10 @@ def init_mlp_params(key, layer_sizes, scale=0.1):
     subkeys = split_prng_key(key, len(layer_sizes) - 1)
     return [init_linear_layer(sk, in_dim, out_dim, scale) for sk, in_dim, out_dim in zip(subkeys, layer_sizes[: -1], layer_sizes[1 :]) ]
 
-# Step 9 - linear_forward (not yet solved)
-# TODO: implement
+# Step 9 - linear_forward
+def linear_forward(x, layer_params):
+    # TODO: compute x @ W + b using layer_params['W'] and layer_params['b'].
+    return jnp.dot(x, layer_params['W']) + layer_params['b']
 
 # Step 10 - relu_activation (not yet solved)
 # TODO: implement
